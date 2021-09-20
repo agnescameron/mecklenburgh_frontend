@@ -3,3 +3,7 @@
 	height: 650px;
 	background-color: lightgreen;
 }
+
+svg path {
+	shape-rendering: crispEdges;
+}

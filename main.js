@@ -1,30 +1,25 @@
 import SVG from './assets/svg.min.js'
 import $ from './assets/jquery.min.js'
 
-// const draw = SVG().addTo('#park').size(2100, 1650)
-let trees = []
-	const draw = SVG().addTo('#park').size(800, 650)
+let svgs = []
+const draw = SVG().addTo('#park').size(800, 650)
 
 async function asyncForEach(array, callback) {
-  for (let index = 0; index < array.length; index++) {
-    await callback(array[index], index);
-  }
+	for (let index = 0; index < array.length; index++) {
+		await callback(array[index], index);
+	}
 }
 
 async function drawPlant(plant, index) {
-	trees[index] = draw.circle(Number(plant.radius)).move(Number(plant.x_pos), Number(plant.y_pos))
+	svgs[index] = draw.circle(Number(plant.radius)).move(Number(plant.x_pos), Number(plant.y_pos))
 			.attr({ fill: 'none', stroke: "black" })
+			.data('info', plant.description)
+			.click( function() { console.log(this.data('info')) })
 }
 
 async function redraw_park(park) {
+	svgs.forEach(svg => { svg.remove() })
 	await asyncForEach(park.plants, drawPlant)
-
-
-	// park.plants.forEach( tree => { 
-	// 	console.log(tree.radius, tree.x_pos, tree.y_pos);
-	// 	;
-	// } )
-		
 }
 
 async function park_listener() {
@@ -35,4 +30,4 @@ async function park_listener() {
 
 window.setInterval( function() {
   park_listener()
-}, 3000)
+}, 1000)
