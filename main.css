@@ -2,7 +2,36 @@
 	width: 800px;
 	height: 650px;
 	background-color: lightgreen;
+	place-items: center;
 }
+
+/*.park_svg {
+	width: 790px;
+	height: 640px;
+	grid-area: inner-div;
+place-items: center;
+}
+*/
+.park_svg  {
+	position: absolute;
+	grid-area: inner-div;
+}
+
+
+#beds {
+	left: 110px;
+	top: 148px;
+	width: 660px;
+	/*height: 425px;*/
+}
+
+#segments {
+	left: 25px;
+	top: 25px;
+	width: 800px;
+	height: 613px;
+}
+
 
 svg path {
 	shape-rendering: crispEdges;
