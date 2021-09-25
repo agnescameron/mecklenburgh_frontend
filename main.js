@@ -10,22 +10,27 @@ async function asyncForEach(array, callback) {
 	}
 }
 
-async function drawPlant(plant, index) {
-	svgs[index] = draw.circle(Number(plant.radius))
-		.move(Number(plant.x_pos), Number(plant.y_pos))
+async function drawTree(tree, index) {
+	svgs[index] = draw.circle(Number(tree.radius))
+		.move(Number(tree.x_pos), Number(tree.y_pos))
 		.attr({ fill: 'none', stroke: "black" })
-		.data('info', plant.description)
+		.data('info', tree.description)
 		.click( function() { console.log(this.data('info')) })
+}
+
+async function update_feed(park) {
+	console.log('park', park.day, 'event', park.day_events)
 }
 
 async function redraw_park(park) {
 	svgs.forEach(svg => { svg.remove() })
-	await asyncForEach(park.plants, drawPlant)
+	await asyncForEach(park.trees, drawTree)
 }
 
 async function park_listener() {
 	const res = await fetch('http://localhost:8888/park')
 	const park = await res.json()
+	await update_feed(park)
 	await redraw_park(park)
 }
 
@@ -36,6 +41,6 @@ $( document ).ready( function() {
 	park_listener().then( () => {
 		window.setInterval( function() {
 			park_listener()
-		}, 1000)
+		}, 200)
 	});
 });
