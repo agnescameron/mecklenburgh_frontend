@@ -29,26 +29,10 @@ svg {
 	grid-area: inner-div;
 }
 
-
-#beds {
-	left: 115px;
-	top: 153px;
-	width: 598px;
-	/*height: 425px;*/
-}
-
-#segments {
-	left: 35px;
-	top: 45px;
-	width: 720px;
-	/*height: 613px;*/
-}
-
 #garden {
-	left: 35px;
+	left: 40px;
 	top: 45px;
-	width: 720px;
-	/*height: 613px;*/
+	width: 710px;
 }
 
 svg path {

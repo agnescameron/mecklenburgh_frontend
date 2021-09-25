@@ -14,7 +14,7 @@ async function asyncForEach(array, callback) {
 async function drawTree(tree, index) {
 	svgs[index] = draw.circle(Number(tree.radius))
 		.move(Number(tree.x_pos), Number(tree.y_pos))
-		.attr({ fill: 'none', stroke: "black" })
+		.attr({ fill: tree.colour, stroke: "black" })
 		.data('info', tree.description)
 		.click( function() { console.log(this.data('info')) })
 }
@@ -22,7 +22,6 @@ async function drawTree(tree, index) {
 async function update_feed(park) {
 	if (today !== park.day){
 		today = park.day
-		console.log('park', park.day, 'event', park.day_events)
 		park.day_events.forEach(event => {
 			$('#feed').append(today + ": " + event.text + '<br>')
 			$('#feed').scrollTop($("#feed").height())
