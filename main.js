@@ -5,6 +5,10 @@ let svgs = []
 let today
 const draw = SVG().addTo('#park').size(800, 650)
 
+function waitForMs(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms))
+}
+
 async function asyncForEach(array, callback) {
 	for (let index = 0; index < array.length; index++) {
 		await callback(array[index], index);
@@ -19,13 +23,29 @@ async function drawTree(tree, index) {
 		.click( function() { console.log(this.data('info')) })
 }
 
+async function print_text(event) {
+	console.log(event)
+	const delay = 130
+	const words = event.text.split(' ');
+	let i =0; 
+	while(i < words.length) {
+		await waitForMs(delay);
+		$('#feed').append(words[i]+ ' ');
+		i++
+	}
+	$('#feed').append('<br>')
+}
+
 async function update_feed(park) {
 	if (today !== park.day){
+		$('#feed').empty()
 		today = park.day
-		park.day_events.forEach(event => {
-			$('#feed').scrollTop($("#feed").height())
-			$('#feed').append(today + ": " + event.text + '<br>')
-		})
+		const date = new Date(today).toLocaleString('en-us',{day:'numeric', month:'long', year:'numeric'})
+		console.log(date)
+		const day_text = `Today's date is ${date}. This month, we are expecting maximum 
+		temperatures of ${30} degrees, and around ${50}mm of rainfall. Winds low to moderate. <br><br>`
+		$('#feed').append(day_text)
+		await asyncForEach(park.day_events, print_text)
 	}
 }
 
