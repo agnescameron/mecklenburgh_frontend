@@ -36,17 +36,17 @@ place-items: center;
 
 
 #beds {
-	left: 110px;
-	top: 148px;
-	width: 660px;
+	left: 115px;
+	top: 153px;
+	width: 598px;
 	/*height: 425px;*/
 }
 
 #segments {
-	left: 25px;
-	top: 25px;
-	width: 800px;
-	height: 613px;
+	left: 35px;
+	top: 45px;
+	width: 720px;
+	/*height: 613px;*/
 }
 
 
