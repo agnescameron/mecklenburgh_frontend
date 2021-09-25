@@ -25,15 +25,17 @@ async function drawTree(tree, index) {
 
 async function print_text(event) {
 	console.log(event)
-	const delay = 130
-	const words = event.text.split(' ');
-	let i =0; 
-	while(i < words.length) {
-		await waitForMs(delay);
-		$('#feed').append(words[i]+ ' ');
-		i++
-	}
-	$('#feed').append('<br>')
+	const delay = 150
+	// const words = event.text.split(' ');
+	// let i =0; 
+	// while(i < words.length) {
+	// 	await waitForMs(delay);
+	// 	$('#feed').append(words[i]+ ' ');
+	// 	i++
+	// }
+	// await waitForMs(delay)
+	$('#feed').append("> " + event.text)
+	$('#feed').append('<br><br>')
 }
 
 async function update_feed(park) {
@@ -42,8 +44,8 @@ async function update_feed(park) {
 		today = park.day
 		const date = new Date(today).toLocaleString('en-us',{day:'numeric', month:'long', year:'numeric'})
 		console.log(date)
-		const day_text = `Today's date is ${date}. This month, we are expecting maximum 
-		temperatures of ${30} degrees, and around ${50}mm of rainfall. Winds low to moderate. <br><br>`
+		const day_text = `Today's date is ${date}. This month, we are expecting average maximum 
+		temperatures to reach ${Math.round(park.max_temp)} degrees, and around ${Math.round(park.precip)}mm of rainfall. <br><br>`
 		$('#feed').append(day_text)
 		await asyncForEach(park.day_events, print_text)
 	}
