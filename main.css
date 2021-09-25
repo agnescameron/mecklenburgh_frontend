@@ -1,5 +1,5 @@
 body {
-	background-color: lightgreen;
+	background-color: lightgrey;
 	font-family: helvetica;
 	line-height: 1.2;
 }
@@ -7,7 +7,6 @@ body {
 #park {
 	width: 800px;
 	height: 650px;
-	background-color: lightgreen;
 	place-items: center;
 }
 
@@ -16,19 +15,15 @@ body {
 	left: 850px;
 	top: 25px;
 	width: 300px;
-	/*border: 1.5px solid black;*/
-	/*padding: 5px;*/
 	height: 400px;
 	overflow: auto;
 }
 
-/*.park_svg {
-	width: 790px;
-	height: 640px;
-	grid-area: inner-div;
-place-items: center;
+svg {
+	position: absolute;
+	z-index: 2;
 }
-*/
+
 .park_svg  {
 	position: absolute;
 	grid-area: inner-div;
@@ -49,6 +44,12 @@ place-items: center;
 	/*height: 613px;*/
 }
 
+#garden {
+	left: 35px;
+	top: 45px;
+	width: 720px;
+	/*height: 613px;*/
+}
 
 svg path {
 	shape-rendering: crispEdges;
