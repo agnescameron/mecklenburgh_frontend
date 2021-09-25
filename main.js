@@ -2,6 +2,7 @@ import SVG from './assets/svg.min.js'
 import $ from './assets/jquery.min.js'
 
 let svgs = []
+let today
 const draw = SVG().addTo('#park').size(800, 650)
 
 async function asyncForEach(array, callback) {
@@ -19,7 +20,14 @@ async function drawTree(tree, index) {
 }
 
 async function update_feed(park) {
-	console.log('park', park.day, 'event', park.day_events)
+	if (today !== park.day){
+		today = park.day
+		console.log('park', park.day, 'event', park.day_events)
+		park.day_events.forEach(event => {
+			$('#feed').append(today + ": " + event.text + '<br>')
+			$('#feed').scrollTop($("#feed").height())
+		})
+	}
 }
 
 async function redraw_park(park) {

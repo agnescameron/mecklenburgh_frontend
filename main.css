@@ -1,8 +1,25 @@
+body {
+	background-color: lightgreen;
+	font-family: helvetica;
+	line-height: 1.2;
+}
+
 #park {
 	width: 800px;
 	height: 650px;
 	background-color: lightgreen;
 	place-items: center;
+}
+
+#feed {
+	position: fixed;
+	left: 850px;
+	top: 25px;
+	width: 300px;
+	/*border: 1.5px solid black;*/
+	/*padding: 5px;*/
+	height: 400px;
+	overflow: auto;
 }
 
 /*.park_svg {
