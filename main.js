@@ -22,10 +22,14 @@ async function drawTree(tree, index) {
 		.move(Number(tree.x_pos), Number(tree.y_pos))
 		.attr({ fill: tree.main_colour, stroke: "black" })
 		.addClass('tree_svg')
-		.data('info', tree.description)
+		.data({
+			'info': tree.description,
+			'name': tree.name,
+			'latin_name': tree.latin_name,
+		})
 		.click( function() { 
 			$('#treeinfo').empty()
-			$('#treeinfo').append("> " + this.data('info')) 
+			$('#treeinfo').append(`> ${this.data('name')}, <i>${this.data('latin_name')}</i> <br> ${this.data('info')}`) 
 		})
 }
 
