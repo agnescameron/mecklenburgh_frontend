@@ -2,8 +2,11 @@ import SVG from './assets/svg.min.js'
 import $ from './assets/jquery.min.js'
 
 let svgs = []
+let trees = []
 let today
+
 const draw = SVG().addTo('#park').size(800, 650)
+
 
 function waitForMs(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms))
@@ -19,7 +22,9 @@ async function drawTree(tree, index) {
 	svgs[index] = draw.circle(Number(tree.radius))
 		.move(Number(tree.x_pos), Number(tree.y_pos))
 		.attr({ fill: tree.main_colour, stroke: "black" })
+		.addClass('tree_svg')
 		.data('info', tree.description)
+		// .mouseoverJSON.stringify((function() { console.log('hover') })
 		.click( function() { console.log(this.data('info')) })
 }
 
@@ -51,22 +56,24 @@ async function update_feed(park) {
 	}
 }
 
-async function redraw_park(park) {
+async function redraw_park(trees) {
+	console.log('redrawing')
 	svgs.forEach(svg => { svg.remove() })
-	await asyncForEach(park.trees, drawTree)
+	await asyncForEach(trees, drawTree)
 }
 
 async function park_listener() {
 	const res = await fetch("https://server.futuregardens.org.uk/park")
 	const park = await res.json()
 	await update_feed(park)
-	await redraw_park(park)
+	if(JSON.stringify(park.trees) !== JSON.stringify(trees)) 
+		await redraw_park(park.trees)
+		trees = park.trees
 }
 
 $( document ).ready( function() {
 	// var bed  = draw.use('elementId', 'ed.svg')
 	// var bed  = draw.use('elementId', 'path/to/file.svg')
-
 	park_listener().then( () => {
 		window.setInterval( function() {
 			park_listener()

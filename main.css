@@ -25,6 +25,10 @@ svg {
 	z-index: 2;
 }
 
+.tree_svg:hover {
+	cursor: pointer;
+}
+
 .park_svg  {
 	position: absolute;
 	grid-area: inner-div;
