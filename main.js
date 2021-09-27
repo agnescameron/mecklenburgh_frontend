@@ -7,7 +7,6 @@ let today
 
 const draw = SVG().addTo('#park').size(800, 650)
 
-
 function waitForMs(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms))
 }
@@ -24,21 +23,15 @@ async function drawTree(tree, index) {
 		.attr({ fill: tree.main_colour, stroke: "black" })
 		.addClass('tree_svg')
 		.data('info', tree.description)
-		// .mouseoverJSON.stringify((function() { console.log('hover') })
-		.click( function() { console.log(this.data('info')) })
+		.click( function() { 
+			$('#treeinfo').empty()
+			$('#treeinfo').append("> " + this.data('info')) 
+		})
 }
 
 async function print_text(event) {
 	console.log(event)
 	const delay = 150
-	// const words = event.text.split(' ');
-	// let i =0; 
-	// while(i < words.length) {
-	// 	await waitForMs(delay);
-	// 	$('#feed').append(words[i]+ ' ');
-	// 	i++
-	// }
-	// await waitForMs(delay)
 	$('#feed').append("> " + event.text)
 	$('#feed').append('<br><br>')
 }
@@ -72,8 +65,6 @@ async function park_listener() {
 }
 
 $( document ).ready( function() {
-	// var bed  = draw.use('elementId', 'ed.svg')
-	// var bed  = draw.use('elementId', 'path/to/file.svg')
 	park_listener().then( () => {
 		window.setInterval( function() {
 			park_listener()
