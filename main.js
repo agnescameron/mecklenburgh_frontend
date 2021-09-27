@@ -57,7 +57,7 @@ async function redraw_park(park) {
 }
 
 async function park_listener() {
-	const res = await fetch('http://localhost:8888/park')
+	const res = await fetch("https://server.futuregardens.org.uk/park")
 	const park = await res.json()
 	await update_feed(park)
 	await redraw_park(park)
